@@ -1,10 +1,11 @@
 import React from 'react';
 import people1 from '../../../assets/images/people1.png'
-
+import PaitentReviewCard from './PaitentReviewCard';
+import qoute from '../../../assets/icons/quote.svg'
 
 
 const PaitentReviews = () => {
-    const review = [
+    const reviews = [
         {
             _id:1 ,
             name: 'Rasel ',
@@ -51,9 +52,30 @@ const PaitentReviews = () => {
     ]
    
     return (
-        <div>
+        <section className='mt-16 ' >
+            <div className='flex justify-between ' >
+              <div className='flex flex-col justify-center'>
+               <p className='text-xl font-bold text-secondary ml-3 '> Testimonial </p>
+                <h2 className=' text-4xl mt-2 ml-3'> What Our Patients Says </h2>
+              </div>
+              <div className='flex justify-end'>
+                <img  src={qoute} alt='qoute ' className='w-48 h-48' />
+              </div>
+            </div>
+            <div className='mx-auto'>
+               
+                 <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-x-5 gap-y-10 grid-cols-1 mt-2 mx-auto'>
+                    {
+                        reviews.map(review => <PaitentReviewCard 
+                            key={review._id} 
+                            review = {review} >
+
+                         </PaitentReviewCard>)
+                    }
+                 </div>
+            </div>
             
-        </div>
+        </section>
     );
 };
 

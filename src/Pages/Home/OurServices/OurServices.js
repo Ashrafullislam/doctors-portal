@@ -34,7 +34,7 @@ const ourservie = [
         <div>
             <h2 className='text-primary text-center  ' > Our Services </h2>
             <h2 className='text-4xl font-semibold text-center'> Services We Provide </h2>
-            <div className='mt-10 grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-6 justify-items-center justify-center'>
+            <div className='mt-10 grid md:grid-cols-2  sm:grid-cols-1 lg:grid-cols-3 gap-y-6 gap-x-5 justify-items-center justify-center'>
                 {
                     ourservie.map(service => <OurServiceCard key={service.id} service = {service} > </OurServiceCard>)
                 }
