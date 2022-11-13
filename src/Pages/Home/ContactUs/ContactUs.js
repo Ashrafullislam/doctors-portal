@@ -2,7 +2,7 @@ import React from 'react';
 import appointmentBg from '../../../assets/images/appointment.png'
 
 
-const ConnectedUs = () => {
+const ContactUs = () => {
     const connectedBg = {
         background:`url(${appointmentBg})`,
         backgroundSize:'cover',
@@ -11,9 +11,9 @@ const ConnectedUs = () => {
     <section className='mt-10 flex justify-center py-20' style={connectedBg} >
       <div className=''>
 
-        <h2 className='text-xl font-bold text-secondary text-center'> Contact Us </h2>
-        <h2 className='text-4xl mt-3 mb-6 text-white'> Stay connected with us </h2>
-        <form className="form-control w-full max-w-xs">
+        <h2 className='text-xl font-bold text-secondary text-center' data-aos="fade-down" > Contact Us </h2>
+        <h2 className='text-4xl mt-3 mb-6 text-white' data-aos="fade-down" > Stay connected with us </h2>
+        <form className="form-control w-full max-w-xs" data-aos="zoom-in" >
           <input
             type="emial"
             name='email'
@@ -45,4 +45,4 @@ const ConnectedUs = () => {
   );
 };
 
-export default ConnectedUs;
+export default ContactUs;

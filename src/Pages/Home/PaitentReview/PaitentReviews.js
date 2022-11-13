@@ -30,24 +30,7 @@ const PaitentReviews = () => {
             paitentImg: 'https://www.brijdentalclinic.com/wp-content/uploads/2018/06/Richa-Vasant-150x150-60x60.jpg',
 
         }
-        // ,
-        // {
-        //     _id:4 ,
-        //     name: ' Tawhidul',
-        //     location: ' Golshan , Dhaka ',
-        //     description: ' I have undergone root-canal surgery and molar extraction from Dr. Brijesh Patel. Would highly recommend him to anybody who is in need of any dental procedures. During my consultation, he very patiently explained the procedures that had to be done ',
-        //     paitentImg: 'https://www.brijdentalclinic.com/wp-content/uploads/2018/06/Anshul-Kumar-150x150-60x60.jpg',
-
-        // },
-        // {
-        //     _id:5 ,
-        //     name: ' Tawhidul',
-        //     location: ' Golshan , Dhaka ',
-        //     description: ' I have undergone root-canal surgery and molar extraction from Dr. Brijesh Patel. Would highly recommend him to anybody who is in need of any dental procedures. During my consultation, he very patiently explained the procedures that had to be done ',
-        //     paitentImg: 'https://www.brijdentalclinic.com/wp-content/uploads/2018/06/Anshul-Kumar-150x150-60x60.jpg',
-
-        // },
-
+     
 
     ]
    

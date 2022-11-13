@@ -4,7 +4,7 @@ const OurServiceCard = ({service}) => {
     const {title,description,serviceImg,bgColor} = service ;
   return (
     <div>
-      <div className="card w-96 bg-base-100 shadow-xl">
+      <div className="card w-96 bg-base-100 shadow-xl" data-aos="zoom-in" >
         <figure className="px-10 pt-10">
           <img
             src= {serviceImg}

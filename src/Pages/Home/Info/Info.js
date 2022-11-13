@@ -6,7 +6,7 @@ import phone from '../../../assets/icons/phone.svg'
 const Info = () => {
     return (
         <div className='grid lg:grid-cols-3 md:grid-cols-2 my-20 gap-5'>
-          <div className='flex bg-primary lg:flex-row md:flex-row  items-center flex-col justify-center sm:px-3 py-10 text-white rounded-lg'>
+          <div className='flex bg-primary lg:flex-row md:flex-row  items-center flex-col justify-center sm:px-3 py-10 text-white rounded-lg' data-aos="fade-right">
             <div className='mr-4'>
                 <img src={clock} alt='clock  img '  className='w-16 h-16' />
               </div>
@@ -16,7 +16,7 @@ const Info = () => {
             </div>
           </div>
 
-          <div className='flex lg:flex-row md:flex-row  items-center  flex-col sm:px-3 justify-center bg-accent text-white py-10 rounded-lg'>
+          <div className='flex lg:flex-row md:flex-row  items-center  flex-col sm:px-3 justify-center bg-accent text-white py-10 rounded-lg' data-aos="fade-up" >
             <div className=' mr-4'>
                 <img src={marker} alt='location marker img '  className='w-16 h-16' />
               </div>
@@ -26,7 +26,7 @@ const Info = () => {
             </div>
           </div>
           
-          <div className='flex bg-secondary lg:flex-row md:flex-row sm:px-3 items-center flex-col justify-center text-white py-10 rounded-lg'>
+          <div className='flex bg-secondary lg:flex-row md:flex-row sm:px-3 items-center flex-col justify-center text-white py-10 rounded-lg' data-aos="fade-left" >
             <div className='mr-4'>
                 <img src={phone} alt='phone  img ' className='w-16 h-16' />
               </div>
