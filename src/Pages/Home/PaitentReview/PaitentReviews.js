@@ -39,7 +39,7 @@ const PaitentReviews = () => {
             <div className='flex justify-between ' >
               <div className='flex flex-col justify-center'>
                <p className='text-xl font-bold text-secondary ml-3 '> Testimonial </p>
-                <h2 className=' text-4xl mt-2 ml-3'> What Our Patients Says </h2>
+                <h2 className=' text-4xl mt-2 ml-3' data-aos='flip-right' > What Our Patients Says </h2>
               </div>
               <div className='flex justify-end'>
                 <img  src={qoute} alt='qoute ' className='w-48 h-48' />

@@ -4,9 +4,8 @@ import bgImage from '../../../assets/images/bg.png';
 import {DayPicker} from 'react-day-picker';
 import { format } from 'date-fns';
 
-const AppointmentBanner = () => {
-  // state for keep the selected time  default value must new Date () 
-  const [selectedDate ,setSelectedDate] = useState(new  Date())
+const AppointmentBanner = ({selectedDate,setSelectedDate}) => {
+
 
   const styles = {
     header: {
@@ -29,9 +28,9 @@ const AppointmentBanner = () => {
           <img
             src={chair}
             alt=""
-            className="lg:w-1/2 sm:w-10/12 rounded-lg shadow-2xl"
+            className="lg:w-1/2 sm:w-10/12  mx-auto rounded-lg shadow-2xl"
            data-aos="fade-left" />
-          <div>
+          <div data-aos="fade-right">
             <DayPicker
              mode="single" 
              selected={selectedDate}
@@ -43,9 +42,7 @@ const AppointmentBanner = () => {
         </div>
       </div>
     </div>
-    <div className='text-center text-secondary text-2xl font-bold'>
-      <p>Available Appointments on : {format(selectedDate,"PPPP")} </p>
-    </div>
+  
     </section>
   
   );

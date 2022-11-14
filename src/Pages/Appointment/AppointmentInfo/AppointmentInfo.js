@@ -1,61 +1,37 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import BookingAppointmentModal from '../BookingAppointmentModal/BookingAppointmentModal';
 import AppointmentInfoCard from './AppointmentInfoCard';
 
-const AppointmentInfo = () => {
+  const AppointmentInfo = ({selectedDate}) => {
+    const [appointOption,setAppointOption] = useState([])
+    const [treatment,setTreatment] = useState(null)
 
-    const appointmentData = [
-
-        {   _id: 1,
-            title:'Teeth Orthodontics',
-            openTime:'8:00 AM - 9:00 AM',
-            token:'10 SPACES AVAILABLE',
-        },
-        {
-            _id: 2,
-            title:'Cosmetic Dentistry',
-            openTime:'10:05 am - 11:30 am',
-            token:'10 SPACES AVAILABLE',
-        },
-        {
-            _id: 3,
-            title:'Teeth Cleaning',
-            openTime:'10:05 am - 11:30 am',
-            token:'10 SPACES AVAILABLE',
-        },
-        {
-            _id: 4,
-            title:'Teeth Orthodontics',
-            openTime:'10:05 am - 11:30 am',
-            token:'10 SPACES AVAILABLE',
-        },
-        {
-            _id: 5,
-            title:'Teeth Orthodontics',
-            openTime:'10:05 am - 11:30 am',
-            token:'10 SPACES AVAILABLE',
-        }
-        ,
-        {
-            _id: 6,
-            title:'Teeth Orthodontics',
-            openTime:'10:05 am - 11:30 am',
-            token:'10 SPACES AVAILABLE',
-        }
-
-    ]
-
-    
+    useEffect(()=> {
+        fetch('appointmentOption.json')
+        .then(res => res.json())
+        .then(option => setAppointOption(option))
+    },[])
     return (
-        <section  className='mt-10'>
-              <div className='grid lg:grid-cols-3 gap-6 px-6'>
+        <section  className='mt-2 '>
+          <div className='text-center text-secondary text-2xl font-bold'>
+      <p>Available Appointments on : {format(selectedDate,"PP")} </p>
+    </div>
+              <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 px-6 mt-6'>
             {
-                appointmentData.map(data => <AppointmentInfoCard key={data._id}
-                     data = {data} > 
+                appointOption.map(data => <AppointmentInfoCard key={data._id}
+                     data = {data} 
+                     setTreatment = {setTreatment}
+                     > 
                      
                 </AppointmentInfoCard> )
             }
             
         </div>
+        {treatment && 
+         <BookingAppointmentModal treatment = {treatment} selectedDate = {selectedDate} > </BookingAppointmentModal>
+
+        }
         </section>
     
     );

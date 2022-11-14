@@ -8,17 +8,17 @@ const ContactUs = () => {
         backgroundSize:'cover',
     }
   return (
-    <section className='mt-10 flex justify-center py-20' style={connectedBg} >
+    <section className='mt-10  flex justify-center  py-20' style={connectedBg} >
       <div className=''>
 
         <h2 className='text-xl font-bold text-secondary text-center' data-aos="fade-down" > Contact Us </h2>
-        <h2 className='text-4xl mt-3 mb-6 text-white' data-aos="fade-down" > Stay connected with us </h2>
-        <form className="form-control w-full max-w-xs" data-aos="zoom-in" >
+        <h2 className='text-4xl mt-3 mb-6 text-white ' data-aos="fade-down" > Stay connected with us </h2>
+        <form className="form-control lg:w-full md:w-96 sm:w-80  " data-aos="zoom-in" >
           <input
             type="emial"
             name='email'
             placeholder="Enter your email "
-            className="input input-bordered w-full "
+            className="input input-bordered lg:w-full w-5/6 mx-auto "
             required
           />
           <br  />
@@ -26,12 +26,12 @@ const ContactUs = () => {
             type="text"
             name='subject'
             placeholder="Subject "
-            className="input input-bordered w-full "
+            className="input input-bordered  lg:w-full w-5/6 mx-auto "
             required
           />
           <br  />
 
-          <textarea className="textarea textarea-bordered h-24"
+          <textarea className="textarea textarea-bordered h-24  lg:w-full w-5/6 mx-auto"
           name='message'  
           placeholder="Your message " required>
 

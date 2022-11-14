@@ -3,7 +3,7 @@ import React from 'react';
 const PaitentReviewCard = ({review}) => {
   const {name, description, location, paitentImg} = review;
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center' data-aos="zoom-out-right">
       <div className="card w-96 bg-base-100 shadow-2xl">
         <div className="card-body">
           <p> {description} </p>
