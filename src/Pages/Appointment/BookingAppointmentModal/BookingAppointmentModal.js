@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import React from 'react';
 
-const BookingAppointmentModal = ({treatment, selectedDate}) => {
+const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
   const {name, slots} = treatment; // treatment is the name of  Appointment name,option and slots
   const date = format(selectedDate, "PP") ;
 
@@ -11,9 +11,22 @@ const BookingAppointmentModal = ({treatment, selectedDate}) => {
     const appointment = form.appoint_name.value ;
     const date = form.date.value ;
     const name = form.name.value ;
+    const slot = form.slot.value;
     const email = form.email.value ;
     const phone = form.phone.value ;
-    console.log(appointment,date,name,email,phone)
+    // make an object to send data in data base 
+    const booking = {
+        appointment ,
+        paitentName:name ,
+        appointment_date:date ,
+        time:slot,
+        email,
+        phone,
+     
+    }
+    console.log(booking)
+    // when booking was successfully has been compleated show the success toast 
+    setTreatment(null)
   }
   return (
     <div>
@@ -50,7 +63,7 @@ const BookingAppointmentModal = ({treatment, selectedDate}) => {
               <br />
 
 
-              <select className="select select-primary w-full max-w-xs">
+              <select className="select select-primary w-full max-w-xs" name='slot' >
                 {
                     slots.map( (slot , i) => <option key={i} > {slot} </option> )
                 }

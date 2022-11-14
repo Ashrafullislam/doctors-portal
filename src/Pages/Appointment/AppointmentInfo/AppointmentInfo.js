@@ -29,7 +29,7 @@ import AppointmentInfoCard from './AppointmentInfoCard';
             
         </div>
         {treatment && 
-         <BookingAppointmentModal treatment = {treatment} selectedDate = {selectedDate} > </BookingAppointmentModal>
+         <BookingAppointmentModal treatment = {treatment} selectedDate = {selectedDate} setTreatment = {setTreatment} > </BookingAppointmentModal>
 
         }
         </section>
