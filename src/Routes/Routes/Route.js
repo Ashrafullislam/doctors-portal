@@ -4,6 +4,7 @@ import Main from '../../Layout/Main';
 import Appointment from '../../Pages/Appointment/Apointments/Appointment';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login';
+import SignUpForm from '../../Pages/SignUpForm/SignUpForm';
 
   const router = createBrowserRouter ([
     {
@@ -20,6 +21,12 @@ import Login from '../../Pages/Login/Login';
             },
             {
                 path: '/login' , element: <Login > </Login>
+            },
+            {
+              path:'/signup', element: <SignUpForm > </SignUpForm>
+            },
+            {
+                path: '*'  , element: <div> Oh sorry !  Routes not found  </div>
             }
         ]
     }

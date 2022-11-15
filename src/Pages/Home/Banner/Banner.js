@@ -21,9 +21,8 @@ const Banner = () => {
                           
         }
       }
-      useEffect(()=> {
-        Aos.init({duration:'1000'})
-      },[])
+  
+      
   return (
      <div style={styles.header} className = 'lg:h-[80vh]'>
       <div className="hero  text-black " style={styles.content} >

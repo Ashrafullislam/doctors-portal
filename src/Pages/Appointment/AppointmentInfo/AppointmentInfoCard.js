@@ -5,7 +5,7 @@ import './AppointmentInfoCard.css'
 const AppointmentInfoCard = ({data,setTreatment}) => {
   const {name,slots} = data;
   useEffect(()=> {
-    Aos.init({duration:'1000'})
+    Aos.init({duration:'1500'})
   },[])
   return (
     <div className='mx-auto text-center mt-5 ' data-aos="fade-down" >

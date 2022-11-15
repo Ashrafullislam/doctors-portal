@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import app from "../Firebase/Firebase.init";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-const AuthContext = createContext()
+export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
     const auth = getAuth(app)
 const [user,setUser] = useState(null)
@@ -28,6 +28,7 @@ const LogInGoogle = (provider) => {
 
 
 const authInfo = {
+    user,
     name,
     CreateUser,
     LogInUser,
