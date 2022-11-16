@@ -1,9 +1,13 @@
-import React from 'react';
+import Aos from 'aos';
+import React, { useEffect } from 'react';
 import clock from '../../../assets/icons/clock.svg'
 import marker from '../../../assets/icons/marker.svg'
 import phone from '../../../assets/icons/phone.svg'
 
 const Info = () => {
+  useEffect(()=> {
+    Aos.init({duration:'1500'})
+  },[])
     return (
         <div className='grid lg:grid-cols-3 md:grid-cols-2 my-20 gap-5'>
           <div className='flex bg-primary lg:flex-row md:flex-row  items-center flex-col justify-center sm:px-3 py-10 text-white rounded-lg' data-aos="fade-right">

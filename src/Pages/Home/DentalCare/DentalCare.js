@@ -1,9 +1,13 @@
-import React from 'react';
+import Aos from 'aos';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import treatment from '../../../assets/images/treatment.png'
 import PrimaryBtn from '../../../components/PrmaryBtn/PrimaryBtn';
 
 const DentalCare = () => {
+  useEffect(()=> {
+    Aos.init({duration:'1500'})
+  },[])
   return (
     <div className='mt-20 mb-20 max-w-[1200px] mx-auto ' >
      <div className="card lg:card-side bg-base-100 flex lg:justify-around justify-center items-center ">

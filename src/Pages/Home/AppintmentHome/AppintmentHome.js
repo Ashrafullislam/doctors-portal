@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import doctor from '../../../assets/images/doctor.png'
 import doctorBg from '../../../assets/images/appointment.png';
 import { Link } from 'react-router-dom';
 import PrimaryBtn from '../../../components/PrmaryBtn/PrimaryBtn';
+import Aos from 'aos';
 
 const AppintmentHome = () => {
+  useEffect(()=> {
+    Aos.init({duration:'1500'})
+  },[])
   return (
     <section className='mt-10 rounded-lg  ' style={{backgroundImage:`url(${doctorBg})`}} data-aos="flip-up" >
       <div className="hero ">
