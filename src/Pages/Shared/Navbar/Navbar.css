@@ -3,3 +3,13 @@
     color: aliceblue;
     border-radius: 10px;
 }
+.logout{
+    padding: 0 10px ;
+    border-radius: 10px;
+}
+.logout:hover{
+ 
+    background:#3A4256 ;
+    color: white;
+    cursor: pointer;
+}

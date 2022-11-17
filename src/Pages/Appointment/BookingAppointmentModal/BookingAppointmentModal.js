@@ -24,7 +24,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
         phone,
      
     }
-    console.log(booking)
+  
     // when booking was successfully has been compleated show the success toast 
     setTreatment(null)
   }

@@ -12,16 +12,17 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
     let [error,setError] = useState(null)
     const [signUpError , setSignUpError] = useState('')
 
-    const {register,formState:{errors}, handleSubmit} = useForm ();
+    const {register, reset,formState:{errors}, handleSubmit} = useForm ();
 
-    const handleSignUp = data => {
-        setSignUpError('')
+    const handleSignUp = (data,e) => {
+        
     CreateUser(data.email, data.password)
  
     .then(result => {
        const  userResult = result.user ;
        console.log(userResult)
         alert("User create successfull")
+        e.target.reset()
     })
     .catch(error => { 
         const err = error.message ;
@@ -75,8 +76,8 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
          {
             signUpError && <p className='text-red-600'> {signUpError} </p>
          }
-        <input type="Submit"  value={'Sign up '}className="btn bg-accent w-full" />
-        <p className='mt-2'> Already have an account ? <Link to='/loginform' className='text-secondary mt-2 ' >Log in  here  </Link> </p>
+        <input type="Submit"  value={'Sign up '}className="btn bg-accent mt-4 w-full" />
+        <p className='my-2'> Already have an account ? <Link to='/loginform' className='text-secondary  ' >Log in  here  </Link> </p>
         <div className="divider ">OR</div>
       
        <button onClick={GoogleLogIn} className='btn border-slate-900 bordered btn-outline text-accent    w-full ' > Continue with google </button>
