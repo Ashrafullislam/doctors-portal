@@ -21,9 +21,7 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
             {
                 path: '/appointment' , element: <Appointment > </Appointment>
             },
-            {
-                path: '/deshboard', element:  <PrivetRoute> <DeshBoard > </DeshBoard> </PrivetRoute>
-            },
+           
             {
                 path: '/loginform' , element: <LogInForm > </LogInForm>
             },
@@ -34,6 +32,9 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
                 path: '*'  , element: <div> Oh sorry !  Routes not found  </div>
             }
         ]
+    },
+    {
+        path:'/deshboard',  element:  <PrivetRoute> <DeshBoard > </DeshBoard> </PrivetRoute>
     }
   ])
 

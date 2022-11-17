@@ -4,10 +4,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
+
 
  const SignUpForm = () => {
 
-    const {user,CreateUser,LogInGoogle} = useContext(AuthContext)
+    const {user,CreateUser,LogInGoogle,updateUser} = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider() ;
     let [error,setError] = useState(null)
     const [signUpError , setSignUpError] = useState('')
@@ -21,7 +23,17 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
     .then(result => {
        const  userResult = result.user ;
        console.log(userResult)
-        alert("User create successfull")
+       toast.success('User create successfull ')
+        const userInfo = {
+            displayName:data.name,
+        }
+        updateUser(userInfo)
+        .then(()=> {
+
+        })
+        .catch (err => {
+            console.log(err.message)
+        } )
         e.target.reset()
     })
     .catch(error => { 
@@ -37,7 +49,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
         LogInGoogle(googleProvider)
         .then(result => {
             const userResult = result.user ;
-            alert(" Google Log in successfull ")
+            toast.success(" Google Log in successfull ")
         })
         .catch(err => {
             const error = err.message ;
@@ -47,6 +59,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
         })
     }
  
+
 
     useEffect(()=> { 
     Aos.init({duration:'1500'})
@@ -83,7 +96,6 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
        <button onClick={GoogleLogIn} className='btn border-slate-900 bordered btn-outline text-accent    w-full ' > Continue with google </button>
 
       </form>
-          
         </div>
     );
 };

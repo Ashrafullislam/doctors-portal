@@ -3,7 +3,7 @@ import React, {useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
-
+import toast from 'react-hot-toast'
 const LogInForm = () => {
     const {LogInUser,LogInGoogle} = useContext(AuthContext ); 
     const provider = new GoogleAuthProvider();
@@ -21,9 +21,9 @@ const LogInForm = () => {
     LogInUser(data.email, data.password)
     .then(result => {
       const  userResult = result.user ;
-      setSuccess('User Login successfull ')
       setErr('')
       e.target.reset()
+      setSuccess("User login successfull ")
       navigate( from ,{replace:true});
       console.log(userResult)
     })

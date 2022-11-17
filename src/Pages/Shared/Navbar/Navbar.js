@@ -5,14 +5,13 @@ import './Navbar.css'
 
 const Navbar = () => {
  const {user,LogOut } = useContext(AuthContext)
-
+ console.log(user,'new user   ')
  
     const menu = 
     <>
     <li> <NavLink to = '/home' > Home </NavLink> </li>
     <li> <NavLink to = '/about' > About </NavLink> </li>
     <li> <NavLink to = '/appointment' > Appointment </NavLink> </li>
-    <li> <NavLink to = '/reviews' > Reviews </NavLink> </li>
     <li> <NavLink to = '/contacus' > Contact Us </NavLink> </li>
     {
       user?.uid?
