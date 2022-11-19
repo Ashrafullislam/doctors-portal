@@ -60,8 +60,9 @@ useEffect(()=> {
 
         }
          if (!currentUser.emailVerified) { 
+          
             setUser({})
-
+          
         }
         
     

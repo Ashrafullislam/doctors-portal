@@ -22,11 +22,17 @@ const LogInForm = () => {
     LogInUser(data.email, data.password)
     .then(result => {
       const  userResult = result.user ;
+      console.log(userResult)
+      if(!userResult.emailVerified){
+         toast.error("not verified")
+         return ;
+      }
+      setSuccess("User login successfull ")
+      navigate( from ,{replace:true});
         setErr('')
-    
-          e.target.reset()
-        setSuccess("User login successfull ")
-        navigate( from ,{replace:true});
+  
+       e.target.reset()
+       
         
       
     })

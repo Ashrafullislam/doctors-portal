@@ -4,10 +4,12 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch}) => {
-  const {name, slots} = treatment; // treatment is the name of  Appointment name,option and slots
+  const {name, slots} = treatment;
+   // treatment is the name of  Appointment name,option and slots
   const date = format(selectedDate, "PP") ;
   const {user} = useContext(AuthContext)
   const [error , setError] = useState('')
+
   const appointmentHandlar = (event) => {
     event.preventDefault()
     const form = event.target ;
@@ -17,6 +19,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch})
     const slot = form.slot.value;
     const email = form.email.value ;
     const phone = form.phone.value ;
+    console.log(form)
     if(phone.length < 11 ){
       setError('Phone number must be given atleast 11 characters')
       return ;
@@ -47,8 +50,15 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch})
       if(data.acknowledged){
         setTreatment(null)
         toast.success('Booking confirmd ')
+        form.reset()
         refetch()
+
       }
+      else{
+        toast.error(data.message)
+        form.reset()
+      }
+    
       
     })
  
@@ -77,6 +87,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch})
                 name='appoint_name'
                 placeholder="Appointment name"
                 defaultValue={name}
+
                 className="input bg-slate-200 input-bordered w-full max-w-xs"
               />
               <br />
@@ -130,7 +141,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch})
               <br />
               <input
                 type="submit"
-                value={'Submit '}
+                value='Submit '
                 className="btn bg-accent w-full max-w-xs"
               />
             </form>
