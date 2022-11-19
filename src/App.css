@@ -28,7 +28,8 @@
   color: #61dafb;
 }
 [data-theme="light"] .btn[disabled]{
-  background-color: gray;
+  background-color: rgb(199, 193, 193);
+  color: rgba(129, 122, 122, 0.582);
 }
 
 @keyframes App-logo-spin {

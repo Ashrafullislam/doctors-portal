@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../../Layout/Main';
+import About from '../../Pages/About/About/About';
 import Appointment from '../../Pages/Appointment/Apointments/Appointment';
 import DeshBoard from '../../Pages/DeshBoard/DeshBoard';
 import Home from '../../Pages/Home/Home/Home';
@@ -22,6 +23,9 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
                 path: '/appointment' , element: <Appointment > </Appointment>
             },
            
+            {
+               path: '/about', element: <PrivetRoute> <About > </About> </PrivetRoute>
+            },
             {
                 path: '/loginform' , element: <LogInForm > </LogInForm>
             },

@@ -1,10 +1,13 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
-const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
+const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch}) => {
   const {name, slots} = treatment; // treatment is the name of  Appointment name,option and slots
   const date = format(selectedDate, "PP") ;
-
+  const {user} = useContext(AuthContext)
+  const [error , setError] = useState('')
   const appointmentHandlar = (event) => {
     event.preventDefault()
     const form = event.target ;
@@ -14,19 +17,44 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
     const slot = form.slot.value;
     const email = form.email.value ;
     const phone = form.phone.value ;
+    if(phone.length < 11 ){
+      setError('Phone number must be given atleast 11 characters')
+      return ;
+    }
     // make an object to send data in data base 
     const booking = {
-        appointment ,
+       appointmentName: appointment ,
         paitentName:name ,
         appointment_date:date ,
-        time:slot,
+        slots:slot,
         email,
         phone,
      
     }
-  
+    
+    // send data in server  by post method and using fetch url ,where send data 
+    fetch('http://localhost:5000/bookings',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(booking)
+      
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      if(data.acknowledged){
+        setTreatment(null)
+        toast.success('Booking confirmd ')
+        refetch()
+      }
+      
+    })
+ 
+
+    console.log(booking)
     // when booking was successfully has been compleated show the success toast 
-    setTreatment(null)
   }
   return (
     <div>
@@ -40,7 +68,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
             ✕
           </label>
           <h3 className="text-xl font-bold">
-            {name}
+          Treatment name:  {name}
           </h3>
           <p className="py-4">
             <form onSubmit={appointmentHandlar} className="flex  flex-col items-center leading-4	 ">
@@ -74,7 +102,8 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
               <input
                 type="text"
                 name='name'
-                email
+                defaultValue={user?.displayName}
+                readOnly
                 placeholder="Enter your full name "
                 required
                 className="input input-bordered input-accent w-full max-w-xs"
@@ -83,7 +112,9 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
               <input
                 type="email"
                 name="email"
+                defaultValue={user?.email}
                 placeholder="Enter your email "
+                readOnly
                 className="input input-bordered input-accent w-full max-w-xs"
                 required
               />
@@ -95,6 +126,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment}) => {
                 required
                 className="input input-bordered input-accent w-full max-w-xs"
               />
+              {error && <p className='text-red-500'> {error} </p>}
               <br />
               <input
                 type="submit"

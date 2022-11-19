@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import AppintmentHome from '../AppintmentHome/AppintmentHome';
 import Banner from '../Banner/Banner';
 import ContactUs from '../ContactUs/ContactUs';
@@ -8,6 +9,7 @@ import OurServices from '../OurServices/OurServices';
 import PaitentReviews from '../PaitentReview/PaitentReviews';
 
 const Home = () => {
+  
     return (
         <div className='mx-5'>
             <Banner > </Banner>

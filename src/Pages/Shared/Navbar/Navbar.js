@@ -5,7 +5,7 @@ import './Navbar.css'
 
 const Navbar = () => {
  const {user,LogOut } = useContext(AuthContext)
- console.log(user,'new user   ')
+ console.log(user)
  
     const menu = 
     <>

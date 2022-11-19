@@ -2,17 +2,18 @@ import Aos from 'aos';
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 
 
  const SignUpForm = () => {
 
-    const {user,CreateUser,LogInGoogle,updateUser} = useContext(AuthContext)
+    const {user,CreateUser,LogInGoogle,updateUser,userVerify} = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider() ;
     let [error,setError] = useState(null)
     const [signUpError , setSignUpError] = useState('')
+    const navigate = useNavigate()
 
     const {register, reset,formState:{errors}, handleSubmit} = useForm ();
 
@@ -23,18 +24,19 @@ import toast from 'react-hot-toast';
     .then(result => {
        const  userResult = result.user ;
        console.log(userResult)
-       toast.success('User create successfull ')
+       toast.success('User create successfull,Please check your inbox  spam folder to verify email ')
         const userInfo = {
             displayName:data.name,
         }
         updateUser(userInfo)
-        .then(()=> {
-
+        .then(()=> {  
+         navigate('/')
         })
         .catch (err => {
             console.log(err.message)
         } )
         e.target.reset()
+        userVerify(user)
     })
     .catch(error => { 
         const err = error.message ;

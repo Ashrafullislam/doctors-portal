@@ -6,13 +6,24 @@ import reportWebVitals from './reportWebVitals';
 //day picker use and import
 import 'react-day-picker/dist/style.css';
 import AuthProvider from './AuthProvider/AuthProvider';
+// react query use for fatch or update data 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+// Create a client
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot (document.getElementById ('root'));
 root.render (
   <React.StrictMode>
-    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+      <AuthProvider>
       <App />
     </AuthProvider>
+    </QueryClientProvider>
+
   </React.StrictMode>
 );
 

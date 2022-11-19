@@ -1,12 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth"; 
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth"; 
+import toast from "react-hot-toast";
 
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
     const auth = getAuth(app)
-const [user,setUser] = useState(null)
+const [user,setUser] = useState({})
 const [loading,setLoading]  = useState(true)
 
 // create user with email and password 
@@ -15,10 +16,14 @@ const CreateUser = (email,password )  => {
     return createUserWithEmailAndPassword (auth, email,password)
 }
 
-
+// send emil veirficatioin email 
+const userVerify = () => {
+   return sendEmailVerification(auth.currentUser)
+}
 
 // log in user with email and password 
 const LogInUser = (email,password) => {
+   
     setLoading(true)
     return signInWithEmailAndPassword(auth,email,password)
 }
@@ -26,6 +31,7 @@ const LogInUser = (email,password) => {
 
 // login with google 
 const LogInGoogle = (provider) => {
+
     setLoading(true)
   return  signInWithPopup(auth,provider)
 }
@@ -40,7 +46,8 @@ const updateUser = (userInfo ) => {
 // signout handlar 
 const LogOut = () => {
     setLoading(true)
-    signOut(auth)
+    setUser({})
+   return signOut(auth)
 }
 
 
@@ -48,7 +55,16 @@ const LogOut = () => {
 useEffect(()=> {
     const unsubscribe = onAuthStateChanged(auth, currentUser=>{
         setLoading(false)
-        setUser(currentUser)
+        if(currentUser.emailVerified){
+            setUser(currentUser)
+
+        }
+         if (!currentUser.emailVerified) { 
+            setUser({})
+
+        }
+        
+    
     })
     return ()=> unsubscribe()
 
@@ -62,7 +78,8 @@ const authInfo = {
     LogInGoogle,
     loading,
     LogOut,
-    updateUser
+    updateUser,
+    userVerify
 
  }
 

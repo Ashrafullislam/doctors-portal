@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import chair from '../../../assets/images/chair.png';
 import bgImage from '../../../assets/images/bg.png';
 import {DayPicker} from 'react-day-picker';
 import { format } from 'date-fns';
+
 
 const AppointmentBanner = ({selectedDate,setSelectedDate}) => {
 
@@ -20,6 +21,7 @@ const AppointmentBanner = ({selectedDate,setSelectedDate}) => {
       width: '100%',
     },
   };
+
   return (
     <section>
   <div style={styles.header} className="lg:h-[80vh]">
