@@ -55,15 +55,19 @@ const LogOut = () => {
 useEffect(()=> {
     const unsubscribe = onAuthStateChanged(auth, currentUser=>{
         setLoading(false)
-        if(currentUser.emailVerified){
-            setUser(currentUser)
 
-        }
-         if (!currentUser.emailVerified) { 
+        setUser(currentUser)
+        // the condition work  properly to verify user and access  to login 
+
+        // if(currentUser.emailVerified){
+        //     setUser(currentUser)
+
+        // }
+        //  if (!currentUser.emailVerified) { 
           
-            setUser({})
+        //     setUser({})
           
-        }
+        // }
         
     
     })

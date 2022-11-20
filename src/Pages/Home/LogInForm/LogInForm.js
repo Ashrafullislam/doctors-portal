@@ -12,8 +12,8 @@ const LogInForm = () => {
     const [success,setSuccess] = useState('')
     const location = useLocation()
     const navigate = useNavigate ()
-    const from  = location.state?.from?.pathname  || "/"
-   
+    const from  = location.state?.from?.pathname || "/"
+   console.log(from,'form')
   
   // source from react-form-hook
   const handleLogin = (data, e) => {
@@ -23,18 +23,19 @@ const LogInForm = () => {
     .then(result => {
       const  userResult = result.user ;
       console.log(userResult)
-      if(!userResult.emailVerified){
-         toast.error("not verified")
-         return ;
-      }
+
+     //  verified user only able to log in 
+      // if(!userResult.emailVerified){
+      //    toast.error(" Please verify your email  ")
+      //    return ;
+      // }
+
       setSuccess("User login successfull ")
-      navigate( from ,{replace:true});
-        setErr('')
-  
-       e.target.reset()
+      getUserToken(data.email)
+      setErr('')
+    
+      e.target.reset()
        
-        
-      
     })
     .catch(err  => {
       const error = err.message ;
@@ -42,6 +43,20 @@ const LogInForm = () => {
       setSuccess('')
     })
   }
+   
+  // token create and veriy jwt token to access user 
+      // get access token from server site 
+      const getUserToken = (email) => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+        .then(res =>  res.json())
+         .then(data => {
+            if(data.accessToken){
+                localStorage.setItem('accessToken', data.accessToken)
+                navigate( from ,{replace:true});
+
+            }
+         })
+    }
 
 
   // google login handlar 

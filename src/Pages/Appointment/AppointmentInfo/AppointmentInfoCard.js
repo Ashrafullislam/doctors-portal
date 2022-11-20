@@ -29,7 +29,7 @@ const AppointmentInfoCard = ({data,setTreatment}) => {
           <p> {slots.length > 1 ? `Available spaces ${slots.length}`:`Available space${slots.length}` } </p>
 
           <div className="card-actions justify-center"data-aos="fade-right" >
-          {user.email? 
+          {user?.email? 
             <label  htmlFor="booking-modal" className={`btn  ${slots.length === 0 ? " " : "  btn-primary   bg-gradient-to-r from-primary  to-secondary  "} text-white `}
             disabled =  {slots.length === 0  }              
              onClick={handleBook}> Book Appointment </label>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import DashBoardLayout from '../../Layout/DashBoardLayout/DashBoardLayout';
 import Main from '../../Layout/Main';
 import About from '../../Pages/About/About/About';
 import Appointment from '../../Pages/Appointment/Apointments/Appointment';
-import DeshBoard from '../../Pages/DeshBoard/DeshBoard';
+import MyAppointment from '../../Pages/DashBoard/MyAppointment/MyAppointment';
 import Home from '../../Pages/Home/Home/Home';
 import LogInForm from '../../Pages/Home/LogInForm/LogInForm';
 import SignUpForm from '../../Pages/SignUpForm/SignUpForm';
@@ -38,7 +39,11 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
         ]
     },
     {
-        path:'/deshboard',  element:  <PrivetRoute> <DeshBoard > </DeshBoard> </PrivetRoute>
+        path:'/dashboard',  element:  <PrivetRoute> <DashBoardLayout >  </DashBoardLayout>  </PrivetRoute>,
+        children: [
+            {path: '/dashboard',  element: <MyAppointment > </MyAppointment> }
+        ]
+
     }
   ])
 

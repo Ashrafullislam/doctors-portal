@@ -14,27 +14,22 @@ import toast from 'react-hot-toast';
     let [error,setError] = useState(null)
     const [signUpError , setSignUpError] = useState('')
     const navigate = useNavigate()
-
-    const {register, reset,formState:{errors}, handleSubmit} = useForm ();
-
-    const handleSignUp = (data,e) => {
-        
+    const {register, formState:{errors}, handleSubmit} = useForm ();
+  
+  // %%%%%%   handle sign up form  %%%%%%%%% 
+    const handleSignUp = (data,e) => { 
     CreateUser(data.email, data.password)
  
     .then(result => {
        const  userResult = result.user ;
-       console.log(userResult)
        toast.success('User create successfull,Please check your inbox  spam folder to verify email ')
-        const userInfo = {
-            displayName:data.name,
-        }
+        const userInfo = { displayName:data.name,}
         updateUser(userInfo)
-        .then(()=> {  
-         navigate('/')
+        .then(()=> { 
+              saveUser(data.name, data.email)
+            
         })
-        .catch (err => {
-            console.log(err.message)
-        } )
+        .catch (err => { console.log(err.message)  } )
         e.target.reset()
         userVerify(user)
     })
@@ -44,9 +39,41 @@ import toast from 'react-hot-toast';
         setSignUpError(err)
     })
 
+// make a function to save user info in database 
+    const saveUser = (name,email) => {
+        const user = {name,email};
+        fetch(`http://localhost:5000/users`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('save  user ',data)
+            if(data.acknowledged){
+                getUserToken(email)
+            }                
+
+        })
+    } 
+
+    // get access token from server site 
+    const getUserToken = (email) => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+        .then(res =>  res.json())
+         .then(data => {
+            if(data.accessToken){
+                localStorage.setItem('accessToken', data.accessToken)
+                navigate('/')
+            }
+         })
+    }
+
   }
 
-
+// user login by google 
     const GoogleLogIn = () => {
         LogInGoogle(googleProvider)
         .then(result => {
@@ -62,7 +89,7 @@ import toast from 'react-hot-toast';
     }
  
 
-
+// its usses for animation 
     useEffect(()=> { 
     Aos.init({duration:'1500'})
     },[])
