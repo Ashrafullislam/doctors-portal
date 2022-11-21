@@ -7,8 +7,9 @@ import toast from "react-hot-toast";
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
     const auth = getAuth(app)
-const [user,setUser] = useState({})
 const [loading,setLoading]  = useState(true)
+const [user,setUser] = useState({})
+
 
 // create user with email and password 
 const CreateUser = (email,password )  => {
@@ -55,7 +56,6 @@ const LogOut = () => {
 useEffect(()=> {
     const unsubscribe = onAuthStateChanged(auth, currentUser=>{
         setLoading(false)
-
         setUser(currentUser)
         // the condition work  properly to verify user and access  to login 
 

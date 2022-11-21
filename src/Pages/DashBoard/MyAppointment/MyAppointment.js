@@ -46,8 +46,8 @@ return (
         </tr>
         </thead>
         <tbody>
-         {
-            bookings.map((booking ,i) =>   
+         { bookings?
+            bookings?.map((booking ,i) =>   
             <tr>
                 <th> {i+1} </th>
                 <td> {booking.paitentName} </td>
@@ -55,7 +55,10 @@ return (
                 <td> {booking.appointment_date} </td>
                 <td> {booking.slots} </td>
             </tr> )
-         }
+            :
+            ''
+            
+       }
         
         
         </tbody>

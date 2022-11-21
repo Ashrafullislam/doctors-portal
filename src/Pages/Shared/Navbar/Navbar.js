@@ -17,7 +17,7 @@ const Navbar = () => {
     <> 
        <li> <NavLink to = '/dashboard' > Deshboard </NavLink> </li>
 
-       <button className='logout' onClick={LogOut} > Log out </button>
+       <button title={user?.displayName} className='logout' onClick={LogOut} > Log out </button>
 
     </>
 
@@ -28,7 +28,7 @@ const Navbar = () => {
     </>
     return (
         <div>
-    <div className="navbar bg-base-100 text-black">
+    <div className="navbar justify-between bg-base-100 text-black">
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -46,7 +46,7 @@ const Navbar = () => {
     {menu}
     </ul>
   </div>
-   <div className=' navbar-end'>
+   <div className=' '>
    <label  htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </label>

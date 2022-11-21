@@ -10,7 +10,7 @@ const Info = () => {
   },[])
     return (
         <div className='grid lg:grid-cols-3 md:grid-cols-2 my-20 gap-5'>
-          <div className='flex bg-primary lg:flex-row md:flex-row  items-center flex-col justify-center sm:px-3 py-10 text-white rounded-lg' data-aos="fade-right">
+          <div className='flex bg-gradient-to-r from-primary to-secondary lg:flex-row md:flex-row  items-center flex-col justify-center sm:px-3 py-10 text-white rounded-lg' data-aos="fade-right">
             <div className='mr-4'>
                 <img src={clock} alt='clock  img '  className='w-16 h-16' />
               </div>
@@ -30,7 +30,7 @@ const Info = () => {
             </div>
           </div>
           
-          <div className='flex bg-secondary lg:flex-row md:flex-row sm:px-3 items-center flex-col justify-center text-white py-10 rounded-lg' data-aos="fade-left" >
+          <div className='flex bg-gradient-to-r from-primary to-secondary lg:flex-row md:flex-row sm:px-3 items-center flex-col justify-center text-white py-10 rounded-lg' data-aos="fade-left" >
             <div className='mr-4'>
                 <img src={phone} alt='phone  img ' className='w-16 h-16' />
               </div>

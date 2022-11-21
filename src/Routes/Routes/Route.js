@@ -4,6 +4,7 @@ import DashBoardLayout from '../../Layout/DashBoardLayout/DashBoardLayout';
 import Main from '../../Layout/Main';
 import About from '../../Pages/About/About/About';
 import Appointment from '../../Pages/Appointment/Apointments/Appointment';
+import AllUsers from '../../Pages/DashBoard/AllUsers/AllUsers';
 import MyAppointment from '../../Pages/DashBoard/MyAppointment/MyAppointment';
 import Home from '../../Pages/Home/Home/Home';
 import LogInForm from '../../Pages/Home/LogInForm/LogInForm';
@@ -41,7 +42,12 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
     {
         path:'/dashboard',  element:  <PrivetRoute> <DashBoardLayout >  </DashBoardLayout>  </PrivetRoute>,
         children: [
-            {path: '/dashboard',  element: <MyAppointment > </MyAppointment> }
+            {
+                path: '/dashboard',  element: <MyAppointment > </MyAppointment> 
+            },
+            {
+                path: '/dashboard/users', element: <AllUsers  > </AllUsers>
+            } 
         ]
 
     }

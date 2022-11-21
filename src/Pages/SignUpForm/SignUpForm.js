@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 
 
  const SignUpForm = () => {
@@ -15,7 +16,13 @@ import toast from 'react-hot-toast';
     const [signUpError , setSignUpError] = useState('')
     const navigate = useNavigate()
     const {register, formState:{errors}, handleSubmit} = useForm ();
+    // useToken part 
+    const [createdUserEmail,setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
   
+    if(token){
+        navigate('/')
+    }
   // %%%%%%   handle sign up form  %%%%%%%%% 
     const handleSignUp = (data,e) => { 
     CreateUser(data.email, data.password)
@@ -26,11 +33,13 @@ import toast from 'react-hot-toast';
         const userInfo = { displayName:data.name,}
         updateUser(userInfo)
         .then(()=> { 
+            // save user function call for created user data save in  database
               saveUser(data.name, data.email)
             
         })
         .catch (err => { console.log(err.message)  } )
         e.target.reset()
+        // user verify with  email send from firebase 
         userVerify(user)
     })
     .catch(error => { 
@@ -53,31 +62,22 @@ import toast from 'react-hot-toast';
         .then(data => {
             console.log('save  user ',data)
             if(data.acknowledged){
-                getUserToken(email)
+                setCreatedUserEmail(email)
             }                
 
         })
     } 
 
-    // get access token from server site 
-    const getUserToken = (email) => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-        .then(res =>  res.json())
-         .then(data => {
-            if(data.accessToken){
-                localStorage.setItem('accessToken', data.accessToken)
-                navigate('/')
-            }
-         })
-    }
-
   }
 
-// user login by google 
+// user Sign up  by google 
     const GoogleLogIn = () => {
         LogInGoogle(googleProvider)
         .then(result => {
             const userResult = result.user ;
+            const email = userResult.email;
+            const name = userResult.displayName;
+            googleSaveUser(name,email)
             toast.success(" Google Log in successfull ")
         })
         .catch(err => {
@@ -86,6 +86,27 @@ import toast from 'react-hot-toast';
             setSignUpError(error)
            
         })
+
+     // make a function to save user info in database and get create token 
+    const googleSaveUser = (name,email) => {
+        const user = {name,email};
+        fetch(`http://localhost:5000/users`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('save  user ',data)
+            if(data.acknowledged){
+                setCreatedUserEmail(email)
+            }                
+
+        })
+    }
+
     }
  
 

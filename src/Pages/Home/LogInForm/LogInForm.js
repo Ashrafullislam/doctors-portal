@@ -1,9 +1,11 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import {  GoogleAuthProvider } from 'firebase/auth';
 import React, {useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast'
+import useToken from '../../../hooks/useToken';
+
 const LogInForm = () => {
     const {LogInUser,LogInGoogle,loading} = useContext(AuthContext ); 
     const provider = new GoogleAuthProvider();
@@ -12,17 +14,22 @@ const LogInForm = () => {
     const [success,setSuccess] = useState('')
     const location = useLocation()
     const navigate = useNavigate ()
+    // use token part to  create token and verify
+    const [loginUser ,setLoginUser] = useState('')
+    const [token]  = useToken(loginUser);
     const from  = location.state?.from?.pathname || "/"
-   console.log(from,'form')
-  
-  // source from react-form-hook
+
+  if(token){
+    navigate( from ,{replace:true});
+
+  }
+  // source from react-form-hook // usging react form hook 
   const handleLogin = (data, e) => {
  
     setSuccess('')
     LogInUser(data.email, data.password)
     .then(result => {
       const  userResult = result.user ;
-      console.log(userResult)
 
      //  verified user only able to log in 
       // if(!userResult.emailVerified){
@@ -31,9 +38,9 @@ const LogInForm = () => {
       // }
 
       setSuccess("User login successfull ")
-      getUserToken(data.email)
+      setLoginUser(data.email)
       setErr('')
-    
+      
       e.target.reset()
        
     })
@@ -44,28 +51,47 @@ const LogInForm = () => {
     })
   }
    
-  // token create and veriy jwt token to access user 
-      // get access token from server site 
-      const getUserToken = (email) => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-        .then(res =>  res.json())
-         .then(data => {
-            if(data.accessToken){
-                localStorage.setItem('accessToken', data.accessToken)
-                navigate( from ,{replace:true});
-
-            }
-         })
-    }
-
+    
 
   // google login handlar 
   const GoogleLogIn = () =>  {
      LogInGoogle(provider)
+     .then(result => {
+      const userResult = result.user;
+      const email = userResult.email;
+      const name = userResult.displayName;
+      googleSigSaveUser(name,email)
+      console.log(email,name,'login')  
+     })
+     .catch(err => {
+      const error = err.message  ;
+      
+     })
+
+       // make a function to save user info in database and get create token 
+    const googleSigSaveUser = (name,email) => {
+      const user = {name,email};
+      fetch(`http://localhost:5000/users`, {
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json'
+          },
+          body:JSON.stringify(user)
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log('save  user ',data)
+          if(data.acknowledged){
+              setLoginUser(email)
+          }                
+
+      })
+  }
 
   }
   
   const {register,formState:{errors}, handleSubmit} = useForm ();
+
   return (
     <div  className=' lg:w-96 mx-auto w-11/12 py-6 px-8 shadow-lg  mt-4'>
         <h2 className='text-2xl font-normal text-center mb-6'> Log in  </h2>
@@ -97,6 +123,6 @@ const LogInForm = () => {
       </form>
     </div>
   );
-};
+ };
 
 export default LogInForm;
