@@ -9,6 +9,7 @@ import MyAppointment from '../../Pages/DashBoard/MyAppointment/MyAppointment';
 import Home from '../../Pages/Home/Home/Home';
 import LogInForm from '../../Pages/Home/LogInForm/LogInForm';
 import SignUpForm from '../../Pages/SignUpForm/SignUpForm';
+import AdminRoute from '../AdminRoute/AdminRoute';
 import PrivetRoute from '../PrivetRoute/PrivetRoute';
 
   const router = createBrowserRouter ([
@@ -46,7 +47,7 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
                 path: '/dashboard',  element: <MyAppointment > </MyAppointment> 
             },
             {
-                path: '/dashboard/users', element: <AllUsers  > </AllUsers>
+                path: '/dashboard/users', element: <AdminRoute > <AllUsers  > </AllUsers> </AdminRoute>
             } 
         ]
 

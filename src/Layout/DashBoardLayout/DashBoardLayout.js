@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Link, Outlet} from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import useAdmin from '../../hooks/useAdmin';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
 
 const DashBoardLayout = () => {
+const  {user} = useContext(AuthContext);
+const [isAdmin] = useAdmin(user?.email) ;
+
   return (
     <div>
       <Navbar> </Navbar>
@@ -20,7 +25,13 @@ const DashBoardLayout = () => {
           <ul className="menu  p-4 w-80 bg-base-100 ">
             {/* <!-- Sidebar content here --> */}
             <li ><Link to='/dashboard'> My Appointment </Link></li>
-            <li><Link to='/dashboard/users'> All Users</Link></li>
+            {/* if isAdmin user.role ? then show the all  user option  */}
+            { isAdmin && 
+            <>
+               <li><Link to='/dashboard/users'> All Users</Link></li>
+
+            </> 
+            }
           </ul>
 
         </div>

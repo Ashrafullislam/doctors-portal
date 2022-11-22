@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllUsers = () => {
     // make react-query function  to get all users 
-    const {data:users = []} = useQuery({
+    const {data:users = [],refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async ()  =>  {
             const res = await fetch('http://localhost:5000/users');
@@ -11,7 +12,28 @@ const AllUsers = () => {
             return data ;
         }
     })
-    console.log(users)
+
+    // make admin handlar 
+    const handleMakeAdmin = _id => {
+      fetch(`http://localhost:5000/users/admin/${_id}`, {
+        method:'PUT',
+        // get token from local storage 
+        headers: {
+          authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+      .then(res =>  res.json())
+      .then(data => {
+        if( data.modifiedCount >  0){
+          toast.success('Admin created successfull')
+          refetch()
+
+        }
+        console.log(data)
+      })
+      .catch(err => console.log(err))
+    }
+
     return (
    <div>
             <h2 className='my-3'> All users </h2>
@@ -31,18 +53,22 @@ const AllUsers = () => {
       
      {
       users.map((user, i) => 
-        <tr>
+    
+        <tr key={user._id}>
         <td> {i+1} </td>
         <td> {user.name} </td>
         <td> {user.email} </td>
-        <td> <button className='btn btn-xs btn-secondary' > Make Admin </button> </td>
+        {/* if  user.role  === admin ? .then hide admin button and create admin */}
+        <td>{  user?.role !== 'admin' &&
+          <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-xs btn-secondary' > Make Admin </button>
+          }  </td>
+
         <td> <button className=' btn btn-xs bg-red-500'> Delete  </button> </td>
       </tr>
 
          )
      }
     
-     
     </tbody>
   </table>
 </div>
