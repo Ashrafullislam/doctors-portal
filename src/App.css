@@ -1,6 +1,3 @@
-.App {
-  text-align: center;
-}
 
 .App-logo {
   height: 40vmin;
@@ -24,9 +21,7 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
+
 [data-theme="light"] .btn[disabled]{
   background-color: rgb(199, 193, 193);
   color: rgba(129, 122, 122, 0.582);

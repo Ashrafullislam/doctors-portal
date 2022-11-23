@@ -2,12 +2,15 @@ import React, { useContext } from 'react';
 import {  NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import './Navbar.css'
+import Switch from "react-switch";
 
 const Navbar = () => {
  const {user,LogOut } = useContext(AuthContext)
+
  
     const menu = 
     <>
+  
     <li> <NavLink to = '/home' > Home </NavLink> </li>
     <li> <NavLink to = '/about' > About </NavLink> </li>
     <li> <NavLink to = '/appointment' > Appointment </NavLink> </li>

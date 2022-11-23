@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth"; 
-import toast from "react-hot-toast";
 
 
 export const AuthContext = createContext()
@@ -9,7 +8,26 @@ const AuthProvider = ({children}) => {
     const auth = getAuth(app)
 const [loading,setLoading]  = useState(true)
 const [user,setUser] = useState({})
+const [theme,setTheme] = useState(false)
 
+// theme set dark and light 
+useEffect(()=> {
+
+    const rootElement = window.document.documentElement;
+    if(theme){
+        rootElement.classList.add("dark");
+        rootElement.classList.remove("light");
+    }
+    else{
+       rootElement.classList.add("light");
+       rootElement.classList.remove("dark");
+    }
+},[theme])
+
+// set theme light ,and dark 
+const toggleTheme = () => {
+    setTheme(!theme);
+}
 
 // create user with email and password 
 const CreateUser = (email,password )  => {
@@ -84,7 +102,9 @@ const authInfo = {
     loading,
     LogOut,
     updateUser,
-    userVerify
+    userVerify,
+    theme,
+    toggleTheme
 
  }
 

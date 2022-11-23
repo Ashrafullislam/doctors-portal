@@ -4,7 +4,9 @@ import DashBoardLayout from '../../Layout/DashBoardLayout/DashBoardLayout';
 import Main from '../../Layout/Main';
 import About from '../../Pages/About/About/About';
 import Appointment from '../../Pages/Appointment/Apointments/Appointment';
+import AddDoctors from '../../Pages/DashBoard/AddDoctors/AddDoctors';
 import AllUsers from '../../Pages/DashBoard/AllUsers/AllUsers';
+import ManageDoctors from '../../Pages/DashBoard/ManageDoctors/ManageDoctors';
 import MyAppointment from '../../Pages/DashBoard/MyAppointment/MyAppointment';
 import Home from '../../Pages/Home/Home/Home';
 import LogInForm from '../../Pages/Home/LogInForm/LogInForm';
@@ -48,7 +50,13 @@ import PrivetRoute from '../PrivetRoute/PrivetRoute';
             },
             {
                 path: '/dashboard/users', element: <AdminRoute > <AllUsers  > </AllUsers> </AdminRoute>
-            } 
+            } ,
+            {
+                path: '/dashboard/adddoctors', element: <AdminRoute > <AddDoctors  > </AddDoctors> </AdminRoute>
+            },
+            {
+              path: '/dashboard/managedoctors', element: <AdminRoute > <ManageDoctors > </ManageDoctors> </AdminRoute>
+            }
         ]
 
     }

@@ -7,7 +7,7 @@ const MyAppointment = () => {
  const {user} = useContext(AuthContext);
 
  const url = `http://localhost:5000/bookings?email=${user?.email}`;
- const {data:bookings = []  , isLoading } = useQuery({
+ const {data:bookings = []   } = useQuery({
     queryKey: ['bookings', user?.email],
     queryFn: async ()=> {
         // now get token  from localstorage 
@@ -23,9 +23,7 @@ const MyAppointment = () => {
     }
 
  })
- if(isLoading){
-    return <Loading > </Loading>
- }
+
  console.log(bookings,'see bookings')
 
 
@@ -57,8 +55,7 @@ return (
             </tr> )
             :
             ''
-
-       }
+        }
         
         
         </tbody>

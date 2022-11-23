@@ -29,6 +29,8 @@ const [isAdmin] = useAdmin(user?.email) ;
             { isAdmin && 
             <>
                <li><Link to='/dashboard/users'> All Users</Link></li>
+               <li> <Link to='/dashboard/adddoctors' > Add Doctors </Link> </li>
+               <li> <Link to='/dashboard/managedoctors' > Manage Doctors </Link> </li>
 
             </> 
             }
