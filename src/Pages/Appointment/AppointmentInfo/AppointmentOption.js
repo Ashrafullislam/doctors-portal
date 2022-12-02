@@ -1,16 +1,16 @@
 import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import React, { useState } from 'react';
 import Loading from '../../Shared/Loading/Loading';
 import BookingAppointmentModal from '../BookingAppointmentModal/BookingAppointmentModal';
-import AppointmentInfoCard from './AppointmentInfoCard';
+import AppointmentOptionCard from './AppointmentOptionCard';
 
-  const AppointmentInfo = ({selectedDate}) => {
+  const AppointmentOption = ({selectedDate}) => {
      const [appointOption,setAppointOption] = useState([])
      
       // const {loading} = useContext(AuthContext)
+
 
      const date = format(selectedDate,'PP')
     const [treatment,setTreatment] = useState(null)
@@ -23,6 +23,7 @@ import AppointmentInfoCard from './AppointmentInfoCard';
     .then(res => res.json())
     .catch(error => console.log(error))
    })
+   console.log(appointment_option,'appointment option ')
     if(isLoading){
       return <Loading > </Loading>
     }
@@ -35,12 +36,12 @@ import AppointmentInfoCard from './AppointmentInfoCard';
     </div>
               <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 px-6 mt-6'>
             {
-               appointment_option.map(data => <AppointmentInfoCard key={data._id}
+               appointment_option.map(data => <AppointmentOptionCard key={data._id}
                      data = {data} 
                      setTreatment = {setTreatment}
                      > 
                      
-                </AppointmentInfoCard> )
+                </AppointmentOptionCard> )
             }
             
         </div>
@@ -55,4 +56,4 @@ import AppointmentInfoCard from './AppointmentInfoCard';
     );
 };
 
-export default AppointmentInfo;
+export default AppointmentOption;

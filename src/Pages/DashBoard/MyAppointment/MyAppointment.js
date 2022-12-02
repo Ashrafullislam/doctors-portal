@@ -7,7 +7,8 @@ const MyAppointment = () => {
  const {user} = useContext(AuthContext);
 
  const url = `http://localhost:5000/bookings?email=${user?.email}`;
- const {data:bookings = []   } = useQuery({
+
+ const {data:bookings = [] ,isLoading } = useQuery({
     queryKey: ['bookings', user?.email],
     queryFn: async ()=> {
         // now get token  from localstorage 
@@ -23,14 +24,16 @@ const MyAppointment = () => {
     }
 
  })
+ if(isLoading){
+  return <Loading > </Loading>
+ }
 
  console.log(bookings,'see bookings')
-
 
 return (
 <div>
   <h3 className="text-3xl"> My Appointment</h3>
- <div>
+      <div>
    <div className="overflow-x-auto mt-5">
      <table className="table w-full">
 
@@ -41,20 +44,25 @@ return (
             <th> Treatment Name </th>
             <th> Date </th>
             <th> Appointment Time </th>
+            <th> Delete </th>
         </tr>
         </thead>
         <tbody>
-         { bookings?
-            bookings?.map((booking ,i) =>   
+         { bookings&&
+          
+              bookings?.map((booking ,i) =>   
             <tr key={booking._id}>
                 <th> {i+1} </th>
                 <td> {booking.paitentName} </td>
                 <td> {booking.appointmentName}  </td>
                 <td> {booking.appointment_date} </td>
                 <td> {booking.slots} </td>
+                <td> <button  className='btn bg-red-500 btn-sm text-white' > Delete </button> </td>
             </tr> )
-            :
-            ''
+          
+        
+            
+            
         }
         
         
@@ -62,8 +70,8 @@ return (
        </table>
 
       </div>
-     </div>
-    </div>
+       </div>
+ </div>
 
     );
 };

@@ -33,7 +33,7 @@ const AddDoctors = () => {
  const formData = new FormData();
  formData.append('image',image);
  // upload photo in imgbb to get url and host  the image 
- const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`
+ const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
  fetch(url, {
   method:'POST',
   body: formData
@@ -42,6 +42,7 @@ const AddDoctors = () => {
   .then(imgData => {
     if(imgData.success){
       console.log(imgData.data.url )
+      
       const doctor = {
         name:data.name ,
         email:data.email,
@@ -66,7 +67,6 @@ const AddDoctors = () => {
       .catch(err => console.log(err,'doctor add page '))
       
     }
-    // console.log(imgData)
   })
  }
 

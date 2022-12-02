@@ -7,9 +7,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
 
-
  const SignUpForm = () => {
-
     const {user,CreateUser,LogInGoogle,updateUser,userVerify} = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider() ;
     let [error,setError] = useState(null)
@@ -70,8 +68,9 @@ import useToken from '../../hooks/useToken';
 
   }
 
+  
 // user Sign up  by google 
-    const GoogleLogIn = () => {
+     const GoogleLogIn = () => {
         LogInGoogle(googleProvider)
         .then(result => {
             const userResult = result.user ;
@@ -105,12 +104,12 @@ import useToken from '../../hooks/useToken';
             }                
 
         })
-    }
+     }
 
     }
  
 
-// its usses for animation 
+  // its usses for animation 
     useEffect(()=> { 
     Aos.init({duration:'1500'})
     },[])
@@ -148,7 +147,7 @@ import useToken from '../../hooks/useToken';
       </form>
         </div>
     );
-};
+ };
 
 
 export default SignUpForm ;

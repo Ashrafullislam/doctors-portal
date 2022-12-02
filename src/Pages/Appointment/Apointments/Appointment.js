@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
-import AppointmentInfo from '../AppointmentInfo/AppointmentInfo';
+import AppointmentOption from '../AppointmentInfo/AppointmentOption';
+
 
 const Appointment = () => {
     // Use Lift state to send data all children 
@@ -13,12 +14,11 @@ const Appointment = () => {
             setSelectedDate = {setSelectedDate}
             > </AppointmentBanner>
 
-            <AppointmentInfo selectedDate = {selectedDate} 
+            <AppointmentOption selectedDate = {selectedDate} 
                 
                 setSelectedDate = {setSelectedDate}
             >
-                
-             </AppointmentInfo>
+             </AppointmentOption>
         </div>
     );
 };

@@ -24,6 +24,7 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch})
       setError('Phone number must be given atleast 11 characters')
       return ;
     }
+    
     // make an object to send data in data base 
     const booking = {
        appointmentName: appointment ,
@@ -87,7 +88,6 @@ const BookingAppointmentModal = ({treatment, selectedDate,setTreatment,refetch})
                 name='appoint_name'
                 placeholder="Appointment name"
                 defaultValue={name}
-
                 className="input bg-slate-200 input-bordered w-full max-w-xs"
               />
               <br />

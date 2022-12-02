@@ -104,7 +104,7 @@ const authInfo = {
     updateUser,
     userVerify,
     theme,
-    toggleTheme
+    
 
  }
 
