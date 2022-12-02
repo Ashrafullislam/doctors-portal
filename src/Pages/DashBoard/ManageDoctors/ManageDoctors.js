@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../../Shared/Loading/Loading';
+import DeleteDoctorModal from './DeleteDoctorModal/DeleteDoctorModal';
 
 const ManageDoctors = () => {
-
+  const [doctor,setDoctor] = useState(null)
   const {data:doctors,isLoading} = useQuery({
     queryKey:['doctors'],
     queryFn: async () => {
@@ -19,6 +20,11 @@ const ManageDoctors = () => {
     return <Loading > </Loading>
   }
 
+  // make an delete handlar to set data 
+  const deleteDoctorHandlar = doctor => {
+    setDoctor(doctor)
+  }
+console.log(doctor)
     return (
         <div>
             <h2 className='text-2xl font-bold'> Manage Doctors {doctors.length}  </h2>
@@ -28,7 +34,7 @@ const ManageDoctors = () => {
 
         <thead className=''>
         <tr className='head-tr'>
-            <th></th>
+            <th>SI:</th>
             <th> Image </th>
             <th>  Name </th>
             <th>  Speciality </th>
@@ -48,18 +54,32 @@ const ManageDoctors = () => {
                 <td> {doctor.specialty} </td>
                 <td> {doctor.email} </td>
                 <td> {doctor.email} </td>
-                <td> <button  className='btn bg-red-500 btn-sm text-white' > Delete </button> </td>
+                <td > <label htmlFor="deleteDoctor-modal" className="btn bg-red-500 btn-sm text-white" onClick={()=>deleteDoctorHandlar(doctor) }> Delete </label> </td>
+               
             </tr> )
                     
             
         }
         
-        
         </tbody>
        </table>
 
       </div>
+      <div>
+        {
+          doctor&& 
+          <DeleteDoctorModal
+          title={doctor?.name}
+          message={`Are you sure you want to delete ${doctor?.name} ? .If you delete the doctors then you will could not recover ${doctor?.name} data  `}
+           doctor={doctor} setDoctor={setDoctor}
+
+        >
+           </DeleteDoctorModal>
+        }
+        
+      </div>
        </div>
+
         </div>
     );
 };
